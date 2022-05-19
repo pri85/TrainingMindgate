@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- more bean definitions go here -->
+	<bean id="product" class="com.mindgate.pojo.Product" scope="prototype">
+		<constructor-arg name="productId" value="100"></constructor-arg>
+		<constructor-arg name="name" value="Lays"></constructor-arg>
+		<constructor-arg name="price" value="20"></constructor-arg>
+	</bean>
+	<bean id="product2" class="com.mindgate.pojo.Product" scope="prototype">
+		<constructor-arg name="productId" value="101"></constructor-arg>
+		<constructor-arg name="name" value="Wheels"></constructor-arg>
+		<constructor-arg name="price" value="25"></constructor-arg>
+	</bean>
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Constructor Injection -->
+
+<!-- 	<bean id="address" class="com.mindgate.pojo.Address"> -->
+<!-- 		<constructor-arg name="addressId" value="101"></constructor-arg> -->
+<!-- 		<constructor-arg name="street" value="M.G.road"></constructor-arg> -->
+<!-- 		<constructor-arg name="city" value="Mumbai"></constructor-arg> -->
+<!-- 		<constructor-arg name="state" value="Maharashtra"></constructor-arg> -->
+<!-- 	</bean> -->
+	
+	
+<!-- 	<bean id="employee" class="com.mindgate.pojo.Employee" scope="prototype">		 -->
+<!-- 		<constructor-arg name="employeeId" value="101"></constructor-arg> -->
+<!-- 		<constructor-arg name="name" value="Vivek Gohil"></constructor-arg> -->
+<!-- 		<constructor-arg name="salary" value="1000"></constructor-arg> -->
+<!-- 		<constructor-arg name="homeAddress" ref="address"></constructor-arg> -->
+<!-- 	</bean> -->
+	
+	
+	<bean id="homeAddress" class="com.mindgate.pojo.Address" scope="prototype">
+		<property name="addressId" value="101"></property>
+		<property name="street" value="M.G.road"></property>
+		<property name="city" value="Mumbai"></property>
+		<property name="state" value="Maharashtra"></property>
+	</bean>
+	
+	
+	<bean id="employee" class="com.mindgate.pojo.Employee" 
+	 scope="prototype" autowire="byName">		
+		<property name="employeeId" value="101"></property>
+		<property name="name" value="Vivek Gohil"></property>
+		<property name="salary" value="1000"></property>
+<!-- 		<property name="homeAddress" ref="address"></property> -->
+	</bean>
+	
+	
+		
+</beans>
