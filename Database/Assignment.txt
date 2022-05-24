@@ -1,0 +1,215 @@
+CREATE TABLE client_master(
+client_no VARCHAR(6) CHECK (client_no LIKE 'C%') ,
+name VARCHAR(20) NOT NULL,
+address1 VARCHAR(30),
+address2 VARCHAR(30),
+city VARCHAR(15),
+state VARCHAR(15),
+pincode NUMBER(6),
+bal_due NUMBER(10,2),
+CONSTRAINT pk_client_no PRIMARY KEY (client_no)
+);
+
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00001','Ivan Bayross','Bombay',400054,'Maharashtra',15000
+);
+
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00002','Vandana Saitwal','Madras',780001,'Tamil Nadu',0
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00003','Pramada Jaguste','Bombay',400057,'Maharashtra',5000
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00004','Basu Navindgi','Bombay',400056,'Maharashtra',0
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00005','Ravi Sreedharan','Delhi',100001,'Delhi',2000
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00006','Rukmini','Bombay',400050,'Maharashtra',0
+);
+
+SELECT * FROM client_master;
+
+COMMIT;
+
+CREATE TABLE product_master(
+product_no VARCHAR(6) CHECK (product_no LIKE 'P%') ,
+description VARCHAR(50) NOT NULL,
+profit_percent NUMBER(3,2) NOT NULL,
+unit_measure VARCHAR(10) NOT NULL,
+qty_on_hand NUMBER(3),
+record_lvl NUMBER(8) NOT NULL,
+sell_price NUMBER(8,2) NOT NULL CHECK ( sell_price > 0),
+cost_price NUMBER(8,2) NOT NULL CHECK (cost_price > 0),
+CONSTRAINT pk_product_no PRIMARY KEY (product_no)
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P00001','1.44 Floppies', 5, 'Piece', 100, 20, 525, 500
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P03453','Monitors', 6, 'Piece', 10, 3, 12000, 11280
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P06734','Mouse', 5, 'Piece', 20, 5, 1050, 1000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07865','1.22 Floppies', 5, 'Piece', 100, 20, 525, 500
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07868','Keyboards', 2, 'Piece', 10, 3, 3150, 3050
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07885','CD Drive', 2.5, 'Piece', 10, 3, 5250, 5100
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07965','540 HDD', 4, 'Piece', 10, 3, 8400, 8000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07975','1.44 Driver', 5, 'Piece', 10, 3, 1050, 1000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P08865','1.22 Driver', 5, 'Piece', 2, 3, 1050, 1000
+);
+
+select * from product_master;
+
+commit;
+
+CREATE TABLE salesman_master(
+salesman_no VARCHAR(6) CHECK (salesman_no LIKE 'S%') ,
+salesman_name VARCHAR(20) NOT NULL,
+address1 VARCHAR(30) NOT NULL,
+address2 VARCHAR(30),
+city VARCHAR(20),
+pincode NUMBER(6),
+state VARCHAR(20),
+sal_amt NUMBER(8,2) NOT NULL CHECK (sal_amt > 0),
+tgt_to_get NUMBER(6,2) NOT NULL CHECK (tgt_to_get > 0),
+ytd_sales NUMBER(6,2) NOT NULL,
+remarks VARCHAR(60),
+CONSTRAINT pk_salesman_no PRIMARY KEY (salesman_no)
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00001','Kiran','A/14','Worli','Bombay', 400002,'MAH',3000,100,50,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00002','Manish','65','Nariman','Bombay', 400001,'MAH',3000,200,100,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00003','Ravi','P-7','Bandra','Bombay', 400032,'MAH',3000,200,100,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00004','Ashish','A/5','Juhu','Bombay', 400044,'MAH',3500,200,150,'Good'
+);
+
+SELECT * FROM salesman_master;
+
+COMMIT;
+
+
+CREATE TABLE sales_order(
+s_order_no VARCHAR(6) CHECK (s_order_no LIKE 'O%') ,
+s_order_date DATE ,
+client_no VARCHAR(6) ,
+dely_addr VARCHAR(25),
+salesman_no VARCHAR(6),
+dely_type CHAR(1) CHECK (dely_type == 'P' OR 'F') DEFAULT 'F',
+billed_yn CHAR(1) CHECK (billed_yn LIKE 'Y' OR 'N') DEFAULT 'N',
+dely_date DATE CHECK (dely_date > s_order_date),
+order_status VARCHAR(10) CHECK (order_status LIKE 'in process' OR 'Fulfilled' OR 'BackOrder' OR 'Canceled'),
+CONSTRAINT pk_s_order_no PRIMARY KEY (s_order_no)
+CONSTRAINT fk_client_no FOREIGN KEY(client_no)
+REFERENCES client_master(client_no)
+CONSTRAINT fk_salesman_no FOREIGN KEY(salesman_no)
+REFERENCES salesman_master(salesman_no)
+);
+
+
+CREATE TABLE sales_order(
+s_order_no VARCHAR(6) CHECK (s_order_no LIKE 'O%') ,
+s_order_date DATE ,
+client_no VARCHAR(6) ,
+dely_addr VARCHAR(25),
+salesman_no VARCHAR(6),
+dely_type CHAR(1) CHECK (dely_type LIKE 'P' OR dely_type LIKE 'F'),
+billed_yn CHAR(1) CHECK (billed_yn LIKE 'Y' OR billed_yn LIKE 'N') ,
+dely_date DATE CHECK (dely_date > s_order_date),
+order_status VARCHAR(10) CHECK (order_status LIKE 'in process' OR order_status LIKE 'Fulfilled' OR order_status LIKE 'BackOrder' OR order_status LIKE 'Canceled'),
+CONSTRAINT pk_s_order_no PRIMARY KEY (s_order_no),
+CONSTRAINT fk_client_no FOREIGN KEY(client_no)
+REFERENCES client_master(client_no),
+CONSTRAINT fk_salesman_no FOREIGN KEY(salesman_no)
+REFERENCES salesman_master(salesman_no)
+);
+
+
+
+
+
+By sir
+CREATE TABLE sales_order(
+s_order_no VARCHAR(6) CHECK (s_order_no LIKE 'O%') ,
+s_order_date DATE,
+client_no VARCHAR(6) NOT NULL,
+dely_addr VARCHAR(25),
+salesman_no VARCHAR(6),
+dely_type CHAR(1) CHECK (dely_type IN ('F' , 'P')),
+billed_yn CHAR(1) CHECK (billed_yn IN ('Y' , 'N')),
+dely_date DATE,
+order_status VARCHAR(10) CHECK (order_status IN('in process', 'Fulfilled', 'BackOrder', 'Canceled')),
+CONSTRAINT ck_dely_date CHECK (dely_date > s_order_date),
+CONSTRAINT pk_s_order_no PRIMARY KEY(s_order_no),
+CONSTRAINT fk_client_no FOREIGN KEY(client_no) REFERENCES client_master(client_no),
+CONSTRAINT fk_salesman_no FOREIGN KEY(salesman_no) REFERENCES salesman_master(salesman_no)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
