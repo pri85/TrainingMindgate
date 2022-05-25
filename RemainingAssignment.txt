@@ -1,0 +1,151 @@
+2.	Set Functions and Concatenation :
+23)	Count the total number of orders.
+SELECT COUNT(s_order_no) FROM sales_order;
+
+24)	Calculate the average price of all the products.
+SELECT AVG(sell_price) FROM product_master;
+
+25)	Calculate the minimum price of products.
+SELECT MIN(sell_price) FROM product_master;
+
+26)	Determine the maximum and minimum product prices. Rename the title as max_price and min_price respectively.
+SELECT MAX(sell_price) max_price, MIN(sell_price) min_price FROM product_master;
+
+27)	Count the number of products having price greater than or equal to 1500.
+SELECT COUNT(product_no) FROM product_master WHERE sell_price >= 1500;
+
+28)	Find all the products whose qty_on_hand is less than reorder level.
+SELECT * FROM product_master WHERE qty_on_hand < record_lvl;
+
+29)	Print the information of client_master, product_master, sales_order table in the following formate for all the records
+{cust_name} has placed order {order_no} on {s_order_date}.
+
+SELECT c.name || ' has placed order ' || s.s_order_ no || ' on ' || s.s_order_date
+FROM client_master c, product_master p , sales_order s;
+
+3.	Having and Group by:
+30)	Print the description and total qty sold for each product.
+SELECT description, qty_on_hand
+31)	Find the value of each product sold.
+
+32)	Calculate the average qty sold for each client that has a maximum order value of 15000.00
+SELECT AVG(qty_disp) FROM sales_order_details GRUOP BY s_order_no HAVING product_rate > 15000.00;
+
+33)	Find out the total sales amount receivable for the month of jan. it will be the sum total of 
+all the billed orders for the month.
+SELECT SUM(sal_amount) FROM challan_header  
+34)	Print the information of product_master, order_detail table in the following format for all the records
+{Description} worth Rs. {Total sales for the product} was sold.
+SELECT description ||' worth Rs. ' || qty_on_hand ||' was sold' 
+FROM product_master, sales_order_details
+
+35)	Print the information of product_master, order_detail table in the following format for all the records
+{Description} worth Rs. {Total sales for the product} was produced in the month of {s_order_date} in month formate.
+SELECT description || ' worth Rs. ' || 
+
+4.	Nested Queries :
+36)	Find the product_no and description of non-moving products.
+SELECT product_no, description FROM product_master
+37)	Find the customer name, address1, address2, city and pin code for the client who has placed order no ‘O19001’
+SELECT name, address1, address2, city, pincode 
+FROM client_master 
+WHERE client_no = (SELECT client_no 
+                   FROM sales_order
+                   WHERE salesman_no =(SELECT salesman_no FROM salesman_master));                
+
+38)	Find the client names who have placed orders before the month of May, 1996
+SELECT name 
+FROM client_master 
+WHERE client_no IN (SELECT client_no 
+                   FROM sales_order
+                   WHERE s_order_date < '01-MAY-1996');
+
+39)	Find out if product ‘1.44 Drive’ is ordered by client and print the client_no, name to whom it is was sold.
+SELECT client_no, name
+FROM client_master
+WHERE description = '1.44 Drive' AND client_no = (SELECT cilent_no FROM sales_order);
+
+40)	Find the names of clients who have placed orders worth Rs. 10000 or more.
+SELECT name 
+FROM client_master
+WHERE client_no IN (SELECT client_no
+                    FROM sales_order
+                    WHERE s_order_no IN(SELECT s_order_no
+                                        FROM sales_order_details
+                                        WHERE product_rate >= 10000));
+
+5.	Queries using Date:
+41)	Display the order number and day o which clients placed their order.
+SELECT s_order_no, EXTRACT(day FROM s_order_date)
+FROM sales_order
+42)	Display the month (in alphabets) and date when the order must deliver.
+43)	Display the s_order_date in the format ‘DD-MM-YY’. E.g. 12-February-1996 
+SELECT s_order_date
+FROM sales_order
+
+44)	Find the date, 15 days after today’s date.
+SELECT s_order_date + 15 FROM sales_order;
+
+45)	Find the number of days elapsed between today’s date and the delivery date of the orders placed by the clients.
+
+6.	Table Updations:
+46)	Change the s_order_date of client_no ‘C00001’ to 24/07/96.
+UPDATE sales_order
+SET s_order_date = '24-JUL-1996'
+WHERE client_no = 'C00001';
+
+47)	Change the selling price of ‘1.44 Floppy Drive’ to Rs. 1150.00
+UPDATE product_master
+SET sell_price = '1150'
+WHERE description = '1.44 Floppy Drive';
+
+48)	Delete the records with order number ‘O19001’ from the order table.
+DELETE 
+FROM sales_order
+WHERE s_order_no = 'O19001';
+
+49)	Delete all the records having delivery date before 10th July’96
+DELETE 
+FROM sales_order
+WHERE s_order_date < '10-JUL-1996';
+
+50)	Change the city of client_no ‘C00005’ to ’Bombay’.
+UPDATE client_master
+SET city = 'Bombay'
+WHERE client_no = 'C00005';
+
+51)	Change the delivery date of order number ‘O10008” to 16/08/96
+UPDATE sales_order
+SET s_order_date = '16-AUG-1996'
+WHERE s_order_no='O10008';
+
+52)	Change the bal_due of client_no ‘C00001’ to 1000
+UPDATE cilent_master
+SET bal_due = 1000
+WHERE client_no = 'C00001';
+
+53)	Change the cost price of ‘1.22 Floppy Drive’ to Rs. 950.00.
+UPDATE product_master
+SET cost_price = 950
+WHERE description = '1.22 Floppy Drive';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
