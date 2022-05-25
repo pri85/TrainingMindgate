@@ -1,0 +1,194 @@
+-- ORACLE SQL QUERY --
+
+DROP TABLE employee
+
+CREATE TABLE employee(
+employee_id VARCHAR(10),
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+age NUMBER(6) NOT NULL,
+gender VARCHAR(5) NOT NULL,
+qualification VARCHAR(20) NOT NULL,
+salary NUMBER(7,2) NOT NULL,
+location VARCHAR(20) NOT NULL,
+CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
+);
+
+INSERT INTO employee VALUES
+('MGS3498','Rohit','Thakur',23,'Male','B.E. Comp',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3493','Priyanka','Tayde',25,'Female','B.E. Comp',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3509','Aruna','Vasave',24,'Female','B.E. Comp',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3499','Ravina','Suryawanshi',26,'Female','B.E. Comp',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3505','Kiran','Kadam',24,'Male','B.E. Extc',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3510','Chaitanya','Raykar',25,'Male','B.E. Civil',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3496','Santosh','Honrao',24,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3504','Shubham','Labde',24,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3502','Pravin','Yadav',25,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3516','Tejas','Zambare',23,'Male','B.E. Elec',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3500','Nitesh','Subhedar',24,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3508','Vaibhav','Tekude',23,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3491','Meraj','Shaikh',24,'Male','B.E. Mech',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3495','Shashank','Lokhande',24,'Male','B.E. Extc',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3507','Vinaya','Naik',24,'Female','B.E. Comps',29730,'Mumbai');
+INSERT INTO employee VALUES
+('MGS3597','Sanika','Manchekar',23,'Female','B.E. IT',29730,'Navi Mumbai');
+INSERT INTO employee VALUES
+('MGS3489','Dinesh','Saple',25,'Male','B.E. Elec',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3492','Paras','Gharu',25,'Male','B.E. Mech',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3490','Mahima','Dube',23,'Female','M.Sc - IT',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3506','Komal','More',23,'Female','BTech - Comp',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3503','Rahul','Bhatlavande',24,'Male','B.E. Comp',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3515','Harshal','Bhagade',24,'Male','B.E. Mech',29730,'Thane');
+INSERT INTO employee VALUES
+('MGS3494','Pratap','Bagwe',23,'Male','BTech Mech',29730,'Mumbai');
+
+SELECT * FROM employee;
+COMMIT;
+
+SELECT employee_id,first_name,salary FROM employee;
+
+SELECT employee_id,first_name, last_name, salary FROM employee;
+
+-- Concatinate 2 column and show in single column --
+
+SELECT employee_id,first_name || ' ' || last_name AS full_name, salary FROM employee;
+
+SELECT employee_id,first_name || ' ' || last_name AS full_name, salary, location FROM employee WHERE location = 'Thane';
+
+-- UPDATE QUERY --
+
+UPDATE employee SET salary = salary * 1.2 WHERE location = 'Thane';
+
+COMMIT;
+
+SELECT * FROM employee;
+
+UPDATE employee SET salary = salary * 1.1 WHERE location = 'Mumbai';
+
+COMMIT;
+
+UPDATE employee SET salary = salary * 1.2 WHERE location = 'Navi Mumbai';
+
+-- ORDER BY --
+SELECT * FROM employee ORDER BY first_name;
+
+SELECT * FROM employee WHERE qualification = 'B.E. Mech' OR qualification =  'B.E. Elec' ORDER BY qualification;
+
+SELECT * FROM employee WHERE qualification IN( 'B.E. Mech','B.E. Elec') ORDER BY qualification;
+
+
+--BETWEEN / NOT BETWEEN
+SELECT
+    *
+FROM
+    employee
+WHERE
+    age BETWEEN 20 AND 24
+ORDER BY
+    age;
+
+SELECT
+    *
+FROM
+    employee
+WHERE
+    age NOT BETWEEN 20 AND 24
+ORDER BY
+    age;
+
+-- LIKE/ NOT LIKE
+
+SELECT
+*
+FROM
+employee
+WHERE
+last_name LIKE '%kar';
+
+SELECT
+*
+FROM
+employee
+WHERE
+last_name NOT LIKE '%kar';
+
+
+----------------------
+
+SELECT
+*
+FROM
+employee
+WHERE
+location = 'Mumbai'
+AND gender = 'Male';
+
+SELECT
+*
+FROM
+employee
+WHERE
+location = 'Mumbai'
+AND gender = 'Male'
+ORDER BY
+first_name;
+
+
+----MRF ----
+
+SELECT COUNT(gender) As total_count
+FROM employee
+WHERE gender = 'Female' AND location ='Thane';
+    
+SELECT SUM(salary) total_salary,AVG(salary) average_salary
+FROM employee
+WHERE location = 'Thane';
+
+
+-- Group By--
+
+SELECT location, COUNT(location) employee_count
+FROM employee
+GROUP BY location ;
+
+
+SELECT qualification, SUM(salary) 
+FROM employee
+GROUP BY qualification;
+
+SELECT qualification, SUM(salary) total_salary
+FROM employee
+GROUP BY qualification
+ORDER BY total_salary;
+
+SELECT qualification,SUM(salary) total_salary , COUNT(salary), MIN(salary), MAX(salary), AVG(salary)
+FROM employee
+GROUP BY qualification
+ORDER BY total_salary;
+
+--- HAVING CLAUSE ---
+
+SELECT qualification,SUM(salary) total_salary , COUNT(salary), MIN(salary), MAX(salary), AVG(salary)
+FROM employee
+GROUP BY qualification
+HAVING SUM(salary) > 60000
+ORDER BY total_salary;

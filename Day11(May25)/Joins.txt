@@ -1,0 +1,136 @@
+CREATE TABLE emp_details(
+emp_id NUMBER(5) NOT NULL,
+name VARCHAR(20) NOT NULL,
+sal NUMBER(10) NOT NULL,
+dep_id NUMBER(10) NOT NULL
+);
+
+DESC emp_details
+
+DROP TABLE emp_details;
+ 
+CREATE TABLE dept_details(
+dept_id NUMBER(5) NOT NULL,
+dept_name VARCHAR(20) NOT NULL
+); 
+
+
+DROP TABLE dept_details;
+
+INSERT INTO  dept_details VALUES(1 ,'IT');
+INSERT INTO  dept_details VALUES(2 ,'Admin');
+INSERT INTO  dept_details VALUES(3 ,'Finance');
+
+INSERT INTO  emp_details VALUES(101,'A',1000 ,1);
+INSERT INTO  emp_details VALUES(102,'B',1000 ,1);
+INSERT INTO  emp_details VALUES(103,'C',1000 ,2);
+INSERT INTO  emp_details VALUES(104,'D',1000 ,2);
+INSERT INTO  emp_details VALUES(105,'E',1000 ,3);
+
+SELECT * FROM emp_details;
+SELECT * FROM dept_details;
+
+-- CROSS JOIN ---
+
+SELECT * FROM emp_details, dept_details;
+
+-- INNER JOIN ---
+
+SELECT * FROM emp_details Join dept_details
+ON emp_details.dept_id =  dept_details.dept_id;
+
+
+SELECT * FROM emp_details e Join dept_details d
+ON e.dept_id =  d.dept_id;
+
+COMMIT;
+
+-- OUTER JOIN ---
+
+---LEFT OUTER JOIN ---
+
+SELECT e.emp_id, e.sal, d.dept_id FROM emp_details e Join dept_details d
+ON e.dept_id =  d.dept_id;
+
+SELECT * FROM emp_details e LEFT JOIN dept_details d
+ON e.dept_id =  d.dept_id;
+
+
+-- insert new records in emp_detail --
+
+INSERT INTO  emp_details VALUES(106,'F',1000 ,4);
+INSERT INTO  emp_details VALUES(107,'G',1000 ,5);
+
+-- insert new records in dept_detail --
+
+INSERT INTO  dept_details VALUES(6 ,'Admin');
+INSERT INTO  dept_details VALUES(7 ,'HR');
+
+COMMIT;
+
+-- RIGHT OUTER JOIN ---
+
+SELECT * FROM emp_details e RIGHT JOIN dept_details d
+ON e.dept_id =  d.dept_id;
+
+-- FULL OUTER JOIN --
+
+SELECT * FROM emp_details e FULL JOIN dept_details d
+ON e.dept_id =  d.dept_id;
+
+-- SELF OUTER JOIN --
+
+SELECT
+m.name || ' reports to '|| e.name employee_and_manager
+FROM
+employee_manager_details e
+JOIN employee_manager_details m ON e.employee_id = m.manager_id;
+    
+--- DUMMY TABLE ---
+
+SELECT * FROM dual;
+
+-- SYSTEM DATE ---
+
+SELECT SYSDATE FROM DUAL;
+
+SELECT EXTRACT(year FROM SYSDATE) FROM dual;
+SELECT EXTRACT(month FROM SYSDATE) FROM dual;
+SELECT EXTRACT(day FROM SYSDATE) FROM dual;
+
+SELECT SYSDATE + 1 FROM dual;
+SELECT SYSDATE - 1 FROM dual;
+
+SELECT ADD_MONTHS(SYSDATE, 1) FROM dual;
+
+SELECT ADD_MONTHS(SYSDATE, -1) FROM dual;
+
+SELECT LAST_DAY(SYSDATE) FROM dual;
+
+SELECT LAST_DAY(TO_DATE('25-05-2022','DD-MM-YYYY')) FROM dual;
+
+SELECT MONTHS_BETWEEN(TO_DATE('01-08-2022','DD-MM-YYYY'),
+TO_DATE('01-05-2022','DD-MM-YYYY')) FROM dual;
+
+SELECT NEXT_DAY(SYSDATE, 'SUNDAY') FROM dual;
+
+-- Count length of String --
+
+SELECT last_name, LENGTH(last_name) FROM employee
+ORDER BY LENGTH(last_name);
+
+SELECT last_name, LENGTH(last_name) FROM employee
+ORDER BY LENGTH(last_name),last_name;
+
+---concat --
+SELECT CONCAT('Priyanka ', 'Tayde') FROM dual;
+
+---LOWER ---
+SELECT LOWER('PRIYANKA') FROM dual;
+
+--UPPER --
+SELECT UPPER('priyanka') FROM dual;
+
+SELECT TRIM('      HI     ') FROM dual;
+SELECT LENGTH('      HI            ') FROM dual;
+SELECT LENGTH(TRIM('      HI            ')) FROM dual;

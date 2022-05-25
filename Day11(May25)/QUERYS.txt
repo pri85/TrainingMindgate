@@ -1,0 +1,204 @@
+--CREATE TABLE
+
+CREATE TABLE employee
+(
+employee_id NUMBER(10),
+first_name VARCHAR(20),
+last_name VARCHAR(20),
+department_name VARCHAR(20),
+salary NUMBER(20,2)
+);
+
+--ALTER TABLE ,add colm
+
+ALTER TABLE employee
+ADD joining_date DATE;
+
+-- DESCRIBE table
+DESC employee;
+
+-- ALTER TABLE , DROP COLUMN
+ALTER TABLE employee
+DROP COLUMN joining_date;
+
+-- DESCRIBE TABLE
+DESC employee;
+
+-- ALTER TABLE , MODIFY DATATYPE
+ALTER TABLE employee
+MODIFY first_name VARCHAR(50);
+
+ALTER TABLE employee
+MODIFY(
+first_name VARCHAR(20),
+last_name VARCHAR(20)
+);
+
+--ALTER TABLE , RENAME COLUMN
+ALTER TABLE employee
+RENAME COLUMN first_name TO fst_name;
+
+--ALTER TABLE , RENAME TABLE
+
+
+-- CONSTRAINTS
+CREATE TABLE employee
+(
+employee_id NUMBER(10) NOT NULL,
+first_name VARCHAR(20) NOT NULL,
+last_name VARCHAR(20) NOT NULL,
+department_name VARCHAR(20) NOT NULL,
+salary NUMBER(10,2) NOT NULL
+)
+
+
+INSERT INTO employee 
+VALUES(101,'Vivek' , 'Gohil' , 'Training' , NULL);
+
+-- PRIMARY KEY
+CREATE TABLE purchase_order (
+ purchase_order_id NUMBER(10) PRIMARY KEY,
+ company_name VARCHAR(50) NOT NULL,
+ amount NUMBER(10,2) NOT NULL
+);
+
+DESC purchase_order;
+
+SELECT * FROM user_constraints;
+
+-- DISPLAY CONSTRAINT using TABLE NAME
+
+SELECT * FROM user_constraints
+WHERE table_name = 'PURCHASE_ORDER';
+
+DROP table purchase_order;
+
+
+-- CREATE TABLE WITH PRIMARY KEY
+
+CREATE TABLE purchase_order (
+ purchase_order_id NUMBER(10),
+ company_name VARCHAR(50) NOT NULL,
+ amount NUMBER(10,2) NOT NULL,
+ CONSTRAINT pk_purchase_order_id PRIMARY KEY(purchase_order_id)
+);
+
+-- Forigen Key
+DROP TABLE employee;
+
+-- Create table project_details
+CREATE TABLE project_details (
+project_id NUMBER(10),
+name VARCHAR(20),
+start_date DATE,
+end_date DATE,
+CONSTRAINT pk_project_id PRIMARY KEY(project_id)
+);
+
+--Insert details in project details
+INSERT INTO project_details
+VALUES(1, 
+      'PayTM',
+       TO_DATE ('2022-01-01' ,'YYYY-MM-DD'),
+       TO_DATE ( '2025-01-01','YYYY-MM-DD')
+);
+
+INSERT INTO project_details
+VALUES(2, 'PhonePay',TO_DATE ('2022-01-01' ,'YYYY-MM-DD') ,TO_DATE ( '2025-01-01','YYYY-MM-DD'));
+
+INSERT INTO project_details
+VALUES(3, 'GPay',TO_DATE ('2022-01-01' ,'YYYY-MM-DD') ,TO_DATE ( '2025-01-01','YYYY-MM-DD'));
+
+COMMIT;
+
+CREATE TABLE employee(
+employee_id  NUMBER(10),
+name VARCHAR(50),
+salary NUMBER(10,2),
+project_id NUMBER(10),
+CONSTRAINT pk_employee_id PRIMARY KEY (employee_id),
+CONSTRAINT fk_project_id FOREIGN KEY(project_id)
+REFERENCES project_details(project_id)
+);
+
+INSERT INTO employee
+VALUES(101,'Vivek Gohil',1000,1);
+
+INSERT INTO employee
+VALUES(102,'Rohit',1000,2);
+
+INSERT INTO employee
+VALUES(103,'Priyanka',1000,3);
+
+INSERT INTO employee
+VALUES(104,'Santosh',1000,2);
+
+INSERT INTO employee
+VALUES(105,'Shubham',1000,2);
+
+INSERT INTO employee
+VALUES(106,'Shashank',1000,2);
+
+INSERT INTO employee
+VALUES(107,'Miraj',1000,2);
+
+COMMIT;
+
+COMMIT;
+
+DELETE FROM project_details WHERE project_id=1;
+
+DROP TABLE employee;
+
+COMMIT;
+
+-- UNIQUE CONSTRAINT
+CREATE TABLE employee(
+employee_id NUMBER(10),
+name VARCHAR(20) NOT NULL,
+contact_number VARCHAR(10) NOT NULL UNIQUE,
+salary VARCHAR(20)
+);
+
+INSERT INTO employee
+VALUES(101,'Test 1','9632103241',1000);
+
+INSERT INTO employee
+VALUES(101,'Test2','96324123641',1000);
+
+DROP TABLE employee;
+
+--Check Constraint
+CREATE TABLE employee(
+employee_id VARCHAR(10) CHECK (employee_id LIKE 'MGS%'),
+name VARCHAR(20) NOT NULL,
+contact_number VARCHAR(10) NOT NULL UNIQUE,
+salary VARCHAR(20) CHECK (salary > 0)
+);
+
+INSERT INTO employee
+VALUES('MGS101','Test 1','9632103241',1000);
+
+INSERT INTO employee
+VALUES('MGS102','Test2','9632412364',2000);
+
+DROP TABLE employee;
+
+-- Default Constraint
+
+CREATE TABLE employee(
+employee_id VARCHAR(10) ,
+name VARCHAR(20) NOT NULL,
+contact_number VARCHAR(10) NOT NULL,
+salary VARCHAR(20),
+city VARCHAR(20) DEFAULT 'Mumbai'
+);
+
+INSERT INTO employee
+VALUES('MGS101','Vivek Gohil','9638527413',1000,DEFAULT);
+
+INSERT INTO employee
+(employee_id, name, contact_number,salary)
+VALUES('MGS102','Priyanka','1234569784',9000);
+
+SELECT * FROM employee;

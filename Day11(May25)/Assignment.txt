@@ -1,0 +1,360 @@
+CREATE TABLE client_master(
+client_no VARCHAR(6) CHECK (client_no LIKE 'C%') ,
+name VARCHAR(20) NOT NULL,
+address1 VARCHAR(30),
+address2 VARCHAR(30),
+city VARCHAR(15),
+state VARCHAR(15),
+pincode NUMBER(6),
+bal_due NUMBER(10,2),
+CONSTRAINT pk_client_no PRIMARY KEY (client_no)
+);
+
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00001','Ivan Bayross','Bombay',400054,'Maharashtra',15000
+);
+
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00002','Vandana Saitwal','Madras',780001,'Tamil Nadu',0
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00003','Pramada Jaguste','Bombay',400057,'Maharashtra',5000
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00004','Basu Navindgi','Bombay',400056,'Maharashtra',0
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00005','Ravi Sreedharan','Delhi',100001,'Delhi',2000
+);
+INSERT INTO client_master 
+(client_no, name, city, pincode, state, bal_due)
+VALUES ('C00006','Rukmini','Bombay',400050,'Maharashtra',0
+);
+
+SELECT * FROM client_master;
+
+COMMIT;
+
+CREATE TABLE product_master(
+product_no VARCHAR(6) CHECK (product_no LIKE 'P%') ,
+description VARCHAR(50) NOT NULL,
+profit_percent NUMBER(3,2) NOT NULL,
+unit_measure VARCHAR(10) NOT NULL,
+qty_on_hand NUMBER(3),
+record_lvl NUMBER(8) NOT NULL,
+sell_price NUMBER(8,2) NOT NULL CHECK ( sell_price > 0),
+cost_price NUMBER(8,2) NOT NULL CHECK (cost_price > 0),
+CONSTRAINT pk_product_no PRIMARY KEY (product_no)
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P00001','1.44 Floppies', 5, 'Piece', 100, 20, 525, 500
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P03453','Monitors', 6, 'Piece', 10, 3, 12000, 11280
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P06734','Mouse', 5, 'Piece', 20, 5, 1050, 1000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07865','1.22 Floppies', 5, 'Piece', 100, 20, 525, 500
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07868','Keyboards', 2, 'Piece', 10, 3, 3150, 3050
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07885','CD Drive', 2.5, 'Piece', 10, 3, 5250, 5100
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07965','540 HDD', 4, 'Piece', 10, 3, 8400, 8000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P07975','1.44 Driver', 5, 'Piece', 10, 3, 1050, 1000
+);
+
+INSERT INTO product_master 
+(product_no, description, profit_percent, unit_measure, qty_on_hand, record_lvl, sell_price, cost_price)
+VALUES ('P08865','1.22 Driver', 5, 'Piece', 2, 3, 1050, 1000
+);
+
+select * from product_master;
+
+commit;
+
+CREATE TABLE salesman_master(
+salesman_no VARCHAR(6) CHECK (salesman_no LIKE 'S%') ,
+salesman_name VARCHAR(20) NOT NULL,
+address1 VARCHAR(30) NOT NULL,
+address2 VARCHAR(30),
+city VARCHAR(20),
+pincode NUMBER(6),
+state VARCHAR(20),
+sal_amt NUMBER(8,2) NOT NULL CHECK (sal_amt > 0),
+tgt_to_get NUMBER(6,2) NOT NULL CHECK (tgt_to_get > 0),
+ytd_sales NUMBER(6,2) NOT NULL,
+remarks VARCHAR(60),
+CONSTRAINT pk_salesman_no PRIMARY KEY (salesman_no)
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00001','Kiran','A/14','Worli','Bombay', 400002,'MAH',3000,100,50,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00002','Manish','65','Nariman','Bombay', 400001,'MAH',3000,200,100,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00003','Ravi','P-7','Bandra','Bombay', 400032,'MAH',3000,200,100,'Good'
+);
+
+INSERT INTO salesman_master 
+(salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales,remarks)
+VALUES ('S00004','Ashish','A/5','Juhu','Bombay', 400044,'MAH',3500,200,150,'Good'
+);
+
+SELECT * FROM salesman_master;
+
+COMMIT;
+
+CREATE TABLE sales_order (
+    s_order_no   VARCHAR2(6) CHECK ( s_order_no LIKE 'O%' ),
+    s_order_date DATE,
+    client_no    VARCHAR2(6),
+    dely_addr    VARCHAR2(25),
+    salesman_no  VARCHAR2(6),
+    dely_type    CHAR(1) DEFAULT 'F' CHECK ( dely_type = 'P'
+                                          OR dely_type = 'F' ),
+    billed_yn    CHAR(1) DEFAULT 'N' CHECK ( billed_yn = 'Y'
+                                          OR billed_yn = 'N' ),
+    dely_date    DATE,
+    order_status VARCHAR(10) CHECK ( order_status IN ( 'in process', 'Fulfilled', 'BackOrder', 'Canceled' ) ),
+    CONSTRAINT ck_dely_date CHECK ( dely_date > s_order_date ),
+    CONSTRAINT pk_s_order_no PRIMARY KEY ( s_order_no ),
+    CONSTRAINT fk_client_no FOREIGN KEY ( client_no )
+        REFERENCES client_master ( client_no ),
+    CONSTRAINT fk_salesman_no FOREIGN KEY ( salesman_no )
+        REFERENCES salesman_master ( salesman_no )
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O19001',TO_DATE ('12-Jan-1996' ,'DD-MON-YYYY'),'C00001', 'S00001','F','N',TO_DATE ('20-Jan-1996' ,'DD-MON-YYYY'),'in process'
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O19002',TO_DATE ('25-Jan-1996' ,'DD-MON-YYYY'),'C00002', 'S00002','P','N',TO_DATE ('27-Jan-1996' ,'DD-MON-YYYY'),'Canceled'
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O46865',TO_DATE ('18-Feb-1996' ,'DD-MON-YYYY'),'C00003', 'S00003','F','Y',TO_DATE ('20-Feb-1996' ,'DD-MON-YYYY'),'Fulfilled'
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O19003',TO_DATE ('03-Apr-1996' ,'DD-MON-YYYY'),'C00001', 'S00001','F','Y',TO_DATE ('07-Apr-1996' ,'DD-MON-YYYY'),'Fulfilled'
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O46866',TO_DATE ('20-May-1996' ,'DD-MON-YYYY'),'C00004', 'S00002','P','N',TO_DATE ('22-May-1996' ,'DD-MON-YYYY'),'Canceled'
+);
+
+INSERT INTO sales_order 
+(s_order_no, s_order_date, client_no, salesman_no, dely_type,  billed_yn, dely_date, order_status)
+VALUES ('O10008',TO_DATE ('24-May-1996' ,'DD-MON-YYYY'),'C00005', 'S00004','F','N',TO_DATE ('26-May-1996' ,'DD-MON-YYYY'),'in process'
+);
+
+
+
+CREATE TABLE sales_order_details (
+s_order_no VARCHAR2(6),
+product_no VARCHAR(6),
+qty_ordered NUMBER(8),
+qty_disp NUMBER(8),
+product_rate NUMBER(10,2)    
+CONSTRAINT fk_s_order_no FOREIGN KEY ( s_order_no )
+REFERENCES sales_order ( s_order_no )
+CONSTRAINT fk_product_no FOREIGN KEY ( product_no )
+REFERENCES product_master ( product_no ),
+);
+
+
+CREATE TABLE challan_header (
+challan_no VARCHAR2(6) CHECK(challan_no LIKE 'CH%'),
+s_order_no VARCHAR2(6),
+challan_date DATE NOT NULL,
+billed_yn char(1),
+CONSTRAINT pk_challan_no_header PRIMARY KEY (challan_no),
+CONSTRAINT fk_s_order_no_header FOREIGN KEY ( s_order_no )
+REFERENCES sales_order ( s_order_no )
+);
+
+
+CREATE TABLE challan_details (
+challan_no VARCHAR2(6)CONSTRAINT fk_challan_no_c_details REFERENCES challan_header (challan_no),
+product_no VARCHAR2(6)CONSTRAINT fk_product_no_c_details REFERENCES product_master (product_no),
+qty_disp NUMBER(4,2) NOT NULL,
+CONSTRAINT pk_challan_no_c_details PRIMARY KEY (challan_no, product_no)
+);
+
+insert into sales_order_details values('O19001','P00001',4,4,525);
+insert into sales_order_details values('O19001','P07965',2,1,8400);
+insert into sales_order_details values('O19001','P07885',2,1,5250);
+insert into sales_order_details values('O19002','P00001',10,0,525);
+insert into sales_order_details values('O46865','P07868',3,3,3150);
+insert into sales_order_details values('O46865','P07885',3,1,5250);
+insert into sales_order_details values('O46865','P00001',10,10,525);
+insert into sales_order_details values('O46865','P03453',4,4,1050);
+insert into sales_order_details values('O19003','P03453',2,2,1050);
+insert into sales_order_details values('O19003','P06734',1,1,12000);
+insert into sales_order_details values('O46866','P07965',1,0,8400);
+insert into sales_order_details values('O46866','P07975',1,0,1050);
+insert into sales_order_details values('O19003','P00001',10,4,525);
+insert into sales_order_details values('O19003','P07975',5,3,1050);
+
+select * from sales_order_details;
+
+insert into challan_header values('CH9001','O19001','12-Dec-1995','Y');
+insert into challan_header values('CH6865','O46865','12-Nov-1995','Y');
+insert into challan_header values('CH3965','O10008','12-Oct-1995','Y');
+
+SELECT * FROM challan_header;
+
+insert into challan_details values('CH9001','P00001',4);
+insert into challan_details values('CH9001','P07965',1);
+insert into challan_details values('CH9001','P07885',1);
+insert into challan_details values('CH6865','P07868',3);
+insert into challan_details values('CH6865','P03453',4);
+insert into challan_details values('CH6865','P00001',10);
+insert into challan_details values('CH3965','P00001',5);
+insert into challan_details values('CH3965','P07975',2);
+
+SELECT * FROM challan_details;
+
+--- HANDS-On-Excercies---
+
+--1--
+INSERT INTO challan_details VALUES('CH9001','P00001',5);
+INSERT INTO challan_details VALUES('P785341','P06734',9);
+INSERT INTO challan_details VALUES('P00001','CH9001',1);
+
+--2,3,4---
+DROP TABLE challan_details;
+DROP TABLE product_master;
+
+1)Find out the names of all the clients.
+
+SELECT name FROM client_master;
+
+2)Print the entire client_master table
+
+SELECT * FROM client_master;
+
+3)Retrieve the list of names and the cities of all the clients
+
+SELECT name,city FROM client_master;
+
+4)List the various products available from the product_master table.
+
+SELECT description FROM product_master;
+
+5)Find the names of all clients having ‘a’ as the second letter in their table.
+
+SELECT name FROM client_master 
+WHERE name LIKE '_a%';
+
+6)Find the names of all clients who stay in a city whose second letter is ‘a’
+SELECT name ,city FROM client_master 
+WHERE city LIKE '_a%';
+
+
+7)Find out the clients who stay in a city ‘Bombay’ or city ‘Delhi’ or city ‘Madras’.
+SELECT name ,city FROM client_master 
+WHERE city IN ('Bombay','Delhi','Madras');
+
+8)List all the clients who are located in Bombay.
+SELECT name ,city FROM client_master 
+WHERE city ='Bombay';
+
+9)Print the list of clients whose bal_due are greater than value 10000
+SELECT name ,bal_due FROM client_master 
+WHERE bal_due > 10000;
+
+10)Print the information from sales_order table of orders placed in the month of January.
+SELECT * FROM sales_order 
+WHERE s_order_date LIKE '%JAN%';
+
+11)Display the order information for client_no ‘C00001’ and ‘C00002’
+SELECT * FROM client_master 
+WHERE client_no IN('C00001', 'C00002');
+
+12)Find the products with description as ‘1.44 Drive’ and ‘1.22 Drive’
+SELECT * FROM product_master
+WHERE description IN ('1.44 Driver','1.22 Drivr');
+
+13)Find the products whose selling price is greater than 2000 and less than or equal to 5000
+SELECT * FROM product_master
+WHERE sell_price BETWEEN 2001 AND 4999;
+
+14)Find the products whose selling price is more than 1500 and also find the new selling price as original selling price * 15
+SELECT product_master.*, sell_price*15 AS 'original selling' FROM product_master
+WHERE sell_price > 1500;
+
+15)Rename the new column in the above query as new_price
+SELECT product_master.*, sell_price*15 AS 'new_price' FROM product_master
+WHERE sell_price > 1500;
+
+16)Find the products whose cost price is less than 1500
+SELECT * FROM product_master
+WHERE cost_price < 1500;
+
+17)List the products in sorted order of their description.
+SELECT * FROM product_master
+ORDER BY description;
+
+18)Calculate the square root the price of each product.
+SELECT SQRT(sell_price) , sell_price FROM product_master;
+
+19)Divide the cost of product ‘540 HDD’ by difference between its price and 100
+SELECT * FROM product_master WHERE description = '540 HDD';
+
+20)List the names, city and state of clients not in the state of Maharashtra
+SELECT name ,city FROM client_master 
+WHERE city NOT IN ('Maharashtra');
+
+21)List the product_no, description, sell_price of products whose description begin with letter ‘M’
+SELECT product_no, description, sell_price FROM product_master WHERE description LIKE 'M%';
+
+22)List all the orders that were canceled in the month of May.
+
+SELECT * FROM sales_order WHERE s_order_date LIKE '%MAY%' AND order_status IN( 'Canceled');
+
+
+
+
