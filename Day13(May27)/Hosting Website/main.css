@@ -1,0 +1,234 @@
+
+/* rule */
+/* selector */
+
+/*
+section{
+    background-color: #ff1b68;
+}
+
+h1{
+    color: white;
+    font-family: 'Anton', sans-serif;
+}
+*/    
+* {
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+.main-header{
+    background: #2ddf5c;
+    padding: 8px 16px;
+    width: 100%;
+}
+.main-header > div{
+    display: inline-block;
+}
+
+.main-header__brand{
+    text-decoration: none;
+    font-weight: bold;
+    color: #0e4f1f;
+}
+.main-nav{
+    display: inline-block;
+    text-align: right;
+    width: 90%;
+}
+
+
+.main-nav__items{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-nav__item{
+    display: inline-block;
+    margin: 0 16px;
+}
+.main-nav__item a {
+    text-decoration: none;
+    color: #0e4f1f;
+    font-weight: bold;
+    padding: 3px 0px;
+}
+
+.main-nav__item_cta a {
+    color: white;
+    background: #ff1b68;
+    padding: 5px 8px;
+    border-radius: 8px;
+}
+
+.main-nav__item a:hover,
+.main-nav__item a:active{
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.main-nav__item_cta a:hover,
+.main-nav__item_cta a:active{
+    color: #ff1b68;
+    background: white;
+    border: none;
+}
+
+
+#product-overview{
+    /* background-color: #ff1b68; */
+    background: url(freedom.jpg);
+    width: 100%;
+    height: 500px;
+    padding: 20px;
+    /* border: 5px black solid; */
+    
+    /* margin: 20px; */
+}
+
+#product-overview h1{
+    color: white;
+    font-family: 'Anton', sans-serif;
+}
+
+.section-title{     
+    color: #2ddf5c;
+    text-align: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ;
+}
+
+
+.plan {
+    background: #d5ffdc;
+    text-align: center;
+    padding: 15px;
+    margin: 8px;
+    display: inline-block;
+    width: 30%;
+    vertical-align: middle;
+}
+
+.plan--highlighted {
+    background: #19b841;
+    color: white;
+    box-shadow: 10px 5px 5px grey;
+}
+
+.plan__annotation {
+    background: white;
+    color: green;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 8px 5px 5px grey;
+    font-weight: bold;
+}
+
+.plan__title {
+    color: #0e4f1f;
+}
+
+.plan__price {
+    color: darkgray;
+}
+
+.plan--highlighted .plan__price {
+    color: #0e4f1f;
+}
+
+.plan--highlighted .plan__title {
+    color: white;
+}
+
+.plan__features {
+    list-style: none;
+    margin: 0px;
+    padding: 0;
+}
+
+.plan__features li {
+    margin: 10px;
+}
+
+.button {
+    background-color: #0e4f1f;
+    border: 1.5px solid #0e4f1f;
+    color: white;
+    padding: 15px 32px;
+    border-radius: 10px;
+    font-weight: bold;
+    font: inherit;
+    
+    cursor: pointer;
+    /* text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px; */
+}
+
+.button:hover {
+    background-color: white;
+    color: #0e4f1f;
+}
+
+#key-features{
+    background-color: #ff1b68;
+    margin-top: 8px;
+    padding: 8px;
+
+}
+#key-features .section-title{
+    color: white;
+    margin: 8px;
+    
+}
+.key-features__list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+.key-feature{
+    display: inline-block;
+    width: 32%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.key-feature__image{
+    border: 2px solid #424242;
+    background-color: #ffcebe;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    border-radius: 60px;
+}
+.main-footer{
+    background-color: black;
+    padding: 8px;
+}
+.main-footer_links{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    
+}
+.main-footer__link{
+    display: inline-block;
+    margin: 0px 16px;
+}
+.main-footer__link a{
+    text-decoration: none;
+    color: white;
+}
+
+.main-footer__link a:hover,
+.main-footer__link  a:active{
+    color: #ccc;
+    
+}
